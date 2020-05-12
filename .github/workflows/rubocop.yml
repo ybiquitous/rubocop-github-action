@@ -15,5 +15,7 @@ jobs:
           ruby-version: 2.7
       - run: gem install rubocop --no-document
       - run: |
-          rubocop . | ruby -pe 'sub(/^(.+):(\d+):(\d+): (.+)$/, %q{::error file=\1,line=\2,col=\3::\4})'
+          rubocop . \
+            | ruby -pe 'sub(/^(.+):(\d+):(\d+): (.): (.+)$/, %q{::\4 file=\1,line=\2,col=\3::\5})' \
+            | ruby -pe 'sub(/^::[CW]/, {"::C"=>"::error", "::W"=>"::warning"})'
         shell: bash
