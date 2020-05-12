@@ -1,5 +1,7 @@
 # https://help.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-error-message
 # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#using-a-specific-shell
+#
+# https://docs.rubocop.org/en/stable/configuration/#severity
 
 name: RuboCop
 
@@ -17,5 +19,5 @@ jobs:
       - run: |
           rubocop . \
             | ruby -pe 'sub(/^(.+):(\d+):(\d+): (.): (.+)$/, %q{::\4 file=\1,line=\2,col=\3::\5})' \
-            | ruby -pe 'sub(/^::[CW]/, {"::C"=>"::error", "::W"=>"::warning"})'
+            | ruby -pe 'sub(/^::[RCWEF]/, {"::R"=>"::warning", "::C"=>"::warning", "::W"=>"::warning", "::E"=>"::error", "::F"=>"::error"})'
         shell: bash
