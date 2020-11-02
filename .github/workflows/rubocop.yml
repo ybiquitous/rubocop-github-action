@@ -12,4 +12,4 @@ jobs:
           ruby-version: 2.7
       - run: bundle init
       - run: bundle add --git=https://github.com/rubocop-hq/rubocop.git rubocop
-      - run: rubocop --format=github
+      - run: bundle exec rubocop --format=github
