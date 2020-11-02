@@ -15,9 +15,5 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
-      - run: gem install rubocop --no-document
-      - run: |
-          rubocop --display-cop-names --extra-details --display-style-guide --parallel . \
-            | ruby -pe 'sub(/^(.+):(\d+):(\d+): (.): (.+)$/, %q{::\4 file=\1,line=\2,col=\3::\5})' \
-            | ruby -pe 'sub(/^::[RCWEF]/, {"::R"=>"::warning", "::C"=>"::warning", "::W"=>"::warning", "::E"=>"::error", "::F"=>"::error"})'
-        shell: bash
+      - run: bundle init && bundle add --git=https://github.com/rubocop-hq/rubocop.git rubocop
+      - run: rubocop --display-cop-names --extra-details --display-style-guide --parallel --format github .
