@@ -10,4 +10,4 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
-      - run: bundle exec rubocop --format=github
+      - run: bundle exec rubocop --format=github --display-style-guide
