@@ -1,6 +1,6 @@
 name: RuboCop
 
-on: [push, pull_request]
+on: pull_request
 
 jobs:
   check:
@@ -10,11 +10,4 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7
-      - run: bundle init
-      - run: bundle add --git=https://github.com/rubocop-hq/rubocop.git rubocop
-      - run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email actions@github.com
-          git add Gemfile*
-          git commit -m 'Bundler setup'
       - run: bundle exec rubocop --format=github
